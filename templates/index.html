@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; }
+        .container { max-width: 400px; margin: 60px auto; background: #fff; padding: 30px 40px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h2 { text-align: center; margin-bottom: 24px; }
+        input[type="text"], input[type="number"], input[type="email"] {
+            width: 100%; padding: 10px; margin: 10px 0 18px 0; border: 1px solid #ccc; border-radius: 4px;
+        }
+        button {
+            width: 100%; padding: 12px; background: #007bff; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;
+        }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Track a Product Price</h2>
+        <form action="/track" method="POST">
+            <input type="text" name="url" placeholder="Product URL" required>
+            <input type="number" name="target_price" placeholder="Target Price ₹" required min="1">
+            <input type="email" name="email" placeholder="Your Email" required>
+            <button type="submit">Start Tracking</button>
+        </form>
+    </div>
+</body>
+</html> 
