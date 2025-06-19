@@ -8,87 +8,137 @@
     <style>
         body {
             font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(120deg, #f7fafc 0%, #e3e6f3 100%);
+            background: linear-gradient(120deg, #e0e5ec 0%, #f7fafc 100%);
             margin: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
-        .container {
-            max-width: 420px;
-            margin: 60px auto 20px auto;
-            background: #fff;
-            padding: 36px 40px 30px 40px;
-            border-radius: 14px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        .header {
+            width: 100%;
+            padding: 28px 0 18px 0;
+            background: rgba(255,255,255,0.22);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1.5px solid rgba(255,255,255,0.35);
         }
-        .logo {
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 18px;
+            justify-content: space-between;
+            padding: 0 24px;
         }
-        .logo img {
-            width: 38px;
-            height: 38px;
-            margin-right: 10px;
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+        .header-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+        }
+        .header-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #222;
+            letter-spacing: 1px;
+        }
+        .header-desc {
+            color: #222;
+            font-size: 1.08rem;
+            opacity: 0.5;
+            font-weight: 500;
+        }
+        .container {
+            max-width: 430px;
+            margin: 70px auto 30px auto;
+            background: rgba(255,255,255,0.38);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+            border-radius: 22px;
+            backdrop-filter: blur(32px) saturate(180%);
+            -webkit-backdrop-filter: blur(32px) saturate(180%);
+            border: 1.5px solid rgba(255,255,255,0.55);
+            padding: 48px 44px 36px 44px;
         }
         h2 {
             text-align: center;
-            margin-bottom: 10px;
-            color: #2d3a4a;
-            font-size: 2rem;
+            margin-bottom: 16px;
+            color: #222;
+            font-size: 2.1rem;
+            letter-spacing: 0.5px;
+            font-weight: 700;
         }
         .subtitle {
             text-align: center;
-            color: #6c7a89;
-            font-size: 1rem;
-            margin-bottom: 24px;
+            color: #555;
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+            opacity: 0.7;
         }
         input[type="text"], input[type="number"], input[type="email"] {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0 18px 0;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-            background: #f8fafc;
-            transition: border 0.2s;
+            padding: 14px;
+            margin: 12px 0 22px 0;
+            border: 1.5px solid rgba(255,255,255,0.7);
+            border-radius: 12px;
+            font-size: 1.08rem;
+            background: rgba(255,255,255,0.65);
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 8px rgba(31,38,135,0.04);
         }
         input:focus {
-            border: 1.5px solid #007bff;
+            border: 1.5px solid #007aff;
             outline: none;
+            box-shadow: 0 2px 12px rgba(0,122,255,0.10);
         }
         button {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+            padding: 15px;
+            background: linear-gradient(90deg, #007aff 0%, #00c6fb 100%);
             color: #fff;
             border: none;
-            border-radius: 6px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1.15rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
+            box-shadow: 0 2px 12px rgba(0,122,255,0.10);
+            transition: background 0.2s, box-shadow 0.2s;
         }
         button:hover {
-            background: linear-gradient(90deg, #0056b3 0%, #007bff 100%);
+            background: linear-gradient(90deg, #00c6fb 0%, #007aff 100%);
+            box-shadow: 0 4px 18px rgba(0,122,255,0.13);
         }
         .flash {
-            background: #e6f7e6;
+            background: rgba(230,247,230,0.85);
             color: #1a7f37;
             border: 1px solid #b7e4c7;
-            padding: 10px 16px;
-            border-radius: 5px;
-            margin-bottom: 18px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin-bottom: 22px;
             text-align: center;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.04);
         }
         .footer {
+            width: 100%;
             text-align: center;
-            color: #8a99b3;
-            font-size: 0.98rem;
-            margin: 30px 0 10px 0;
+            color: #222;
+            font-size: 1.02rem;
+            margin: 50px 0 10px 0;
+            padding: 20px 0 12px 0;
+            background: rgba(255,255,255,0.22);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-top: 1.5px solid rgba(255,255,255,0.35);
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.03);
+            font-weight: 500;
+            opacity: 0.7;
         }
         @media (max-width: 600px) {
             .container {
@@ -96,15 +146,21 @@
                 margin: 30px 6px 10px 6px;
             }
             h2 { font-size: 1.3rem; }
+            .header-content { flex-direction: column; gap: 8px; padding: 0 8px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="https://img.icons8.com/color/48/000000/price-tag--v2.png" alt="DropAlert Logo">
-            <span style="font-size:1.3rem;font-weight:700;color:#007bff;">DropAlert</span>
+    <div class="header">
+        <div class="header-content">
+            <div class="header-logo">
+                <img src="https://img.icons8.com/color/48/000000/price-tag--v2.png" alt="DropAlert Logo">
+                <span class="header-title">DropAlert</span>
+            </div>
+            <div class="header-desc">Track Amazon prices & get notified instantly!</div>
         </div>
+    </div>
+    <div class="container">
         <h2>Track a Product Price</h2>
         <div class="subtitle">Get notified when your favorite product drops in price on Amazon.<br>Affiliate links help keep this service free!</div>
         {% with messages = get_flashed_messages() %}
@@ -121,7 +177,6 @@
     </div>
     <div class="footer">
         &copy; {{ 2025 }} DropAlert &mdash; Powered by Amazon Associates.<br>
-        This site uses affiliate links. If you buy through them, we may earn a commission.
     </div>
 </body>
 </html> 
