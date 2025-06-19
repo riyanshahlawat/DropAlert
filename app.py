@@ -21,6 +21,8 @@ HEADERS = {
 
 CHECK_INTERVAL = 6 * 60 * 60  # 6 hours in seconds
 
+AFFILIATE_TAG = 'dropalert-21'
+
 # --- Scraping and Email Logic ---
 def get_price_and_name(url):
     response = requests.get(url, headers=HEADERS)
@@ -44,9 +46,20 @@ def get_price_and_name(url):
         price = None
     return product_name, price
 
+def make_affiliate_link(url):
+    if 'amazon.' not in url:
+        return url
+    if '?tag=' in url or '&tag=' in url:
+        return url  # Already has a tag
+    if '?' in url:
+        return url + f'&tag={AFFILIATE_TAG}'
+    else:
+        return url + f'?tag={AFFILIATE_TAG}'
+
 def send_email(product_name, price, url, to_email, from_email, from_password):
+    affiliate_url = make_affiliate_link(url)
     subject = f'Price Drop Alert: {product_name} now at ₹{price}'
-    body = f'The price for "{product_name}" has dropped to ₹{price} on Amazon!\n\nCheck it out here: {url}'
+    body = f'The price for "{product_name}" has dropped to ₹{price} on Amazon!\n\nCheck it out here: {affiliate_url}'
     msg = MIMEMultipart()
     msg['From'] = from_email
     msg['To'] = to_email
