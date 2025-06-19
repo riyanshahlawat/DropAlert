@@ -159,6 +159,15 @@
                 <span class="header-title">DropAlert</span>
             </div>
             <div class="header-desc">Track Amazon prices & get notified instantly!</div>
+            <div style="margin-left:auto;display:flex;gap:18px;align-items:center;">
+                {% if user_id %}
+                    <a href="{{ url_for('dashboard') }}" style="color:#007aff;font-weight:600;text-decoration:none;">Dashboard</a>
+                    <a href="{{ url_for('logout') }}" style="color:#007aff;font-weight:600;text-decoration:none;">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" style="color:#007aff;font-weight:600;text-decoration:none;">Login</a>
+                    <a href="{{ url_for('signup') }}" style="color:#007aff;font-weight:600;text-decoration:none;">Sign Up</a>
+                {% endif %}
+            </div>
         </div>
     </div>
     <div class="container">
@@ -169,12 +178,18 @@
             <div class="flash">{{ messages[0] }}</div>
           {% endif %}
         {% endwith %}
+        {% if not user_id %}
         <form action="/track" method="POST">
             <input type="text" name="url" placeholder="Amazon Product URL" required>
             <input type="number" name="target_price" placeholder="Target Price ₹" required min="1">
             <input type="email" name="email" placeholder="Your Email" required>
             <button type="submit">Start Tracking</button>
         </form>
+        {% else %}
+        <div style="text-align:center;margin:32px 0;">
+            <a href="{{ url_for('dashboard') }}" style="display:inline-block;padding:14px 32px;background:linear-gradient(90deg,#007aff 0%,#00c6fb 100%);color:#fff;border-radius:12px;font-size:1.1rem;font-weight:600;text-decoration:none;box-shadow:0 2px 12px rgba(0,122,255,0.10);">Go to Dashboard</a>
+        </div>
+        {% endif %}
         <!-- Google AdSense Ad -->
         <div style="margin: 32px 0 0 0; text-align:center;">
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6875281196335633" crossorigin="anonymous"></script>

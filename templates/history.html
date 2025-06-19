@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price History Chart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0e5ec 0%, #f7fafc 100%);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 600px;
+            margin: 60px auto 20px auto;
+            background: rgba(255,255,255,0.38);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+            border-radius: 22px;
+            backdrop-filter: blur(32px) saturate(180%);
+            -webkit-backdrop-filter: blur(32px) saturate(180%);
+            border: 1.5px solid rgba(255,255,255,0.55);
+            padding: 38px 32px 30px 32px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 18px;
+            color: #222;
+            font-size: 2rem;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        .url {
+            word-break: break-all;
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 18px 4px 18px 4px; }
+            h2 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Price History</h2>
+        <div class="url">{{ url }}</div>
+        <canvas id="priceChart" height="320"></canvas>
+    </div>
+    <script>
+        var dates = {{ dates|tojson|safe }};
+        var prices = {{ prices|tojson|safe }};
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Price (INR)',
+                    data: prices,
+                    borderColor: '#007aff',
+                    backgroundColor: 'rgba(0,122,255,0.08)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#007aff',
+                    pointBorderColor: '#fff',
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: false }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Date' },
+                        ticks: { color: '#555' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Price (INR)' },
+                        ticks: { color: '#555' },
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
