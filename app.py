@@ -6,6 +6,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
+import os
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Needed for flash messages
@@ -63,12 +64,15 @@ def send_email(product_name, price, url, to_email, from_email, from_password):
 def check_all_prices():
     print('Running scheduled price check for all tracked products...')
     to_remove = []
+    from_email = os.environ.get('EMAIL')
+    from_password = os.environ.get('EMAIL_PASSWORD')
+    if not from_email or not from_password:
+        print('WARNING: EMAIL or EMAIL_PASSWORD environment variable not set!')
+        return
     for job in tracking_jobs:
         url = job['url']
         target_price = job['target_price']
         user_email = job['user_email']
-        from_email = 'ahlawatgod@gmail.com'
-        from_password = 'Laayra@2006'
         product_name, price = get_price_and_name(url)
         print(f'Checked {product_name}: {price}')
         if price is not None and price <= target_price:
@@ -103,4 +107,5 @@ def track():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port) 
